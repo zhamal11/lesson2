@@ -3,7 +3,7 @@ import PostService from "./PostService.js";
 class PostConteroller {
     async create(req, res) {
         try {
-            const post = await PostService.create(req.body)
+            const post = await PostService.create(req.body, req.files.picture)
             res.json(post)
         } catch(e) {
             res.status(500).json(e)
@@ -25,7 +25,7 @@ class PostConteroller {
             const {id} = req.params
             const post = await PostService.getOne(id)
             return res.json(post)
-        } catch (error) {
+        } catch (e) {
             res.status(500).json(e)
         }
     }
@@ -48,7 +48,7 @@ class PostConteroller {
             
             const post = await PostService.delete(id)
             return res.json(post)
-        } catch (error) {
+        } catch (e) {
             res.status(500).json(e)
         }
     }
